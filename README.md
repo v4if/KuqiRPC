@@ -6,4 +6,4 @@ Distributed Key Value Storage
 
 ## 前方正在施工中...
 
-![45R58PICkvM](https://raw.githubusercontent.com/v4if/KuqiKV/master/doc/img/45R58PICkvM.jpg)
+![45R58PICkvM](https://raw.githubusercontent.com/v4if/KuqiKV/master/doc/img/working.jpg)
