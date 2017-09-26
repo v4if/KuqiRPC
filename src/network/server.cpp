@@ -12,10 +12,10 @@ namespace Network {
         delete socket_;
         delete listen_;
 
-        for (Channel* chan : conn_) {
-            close(chan->fd());
-            delete chan;
-        }
+//        for (Channel* chan : conn_) {
+//            close(chan->fd());
+//            delete chan;
+//        }
     }
 
     void Server::Start() {
@@ -31,10 +31,10 @@ namespace Network {
         delete socket_;
         delete listen_;
 
-        for (Channel* chan : conn_) {
-            close(chan->fd());
-            delete chan;
-        }
+//        for (Channel* chan : conn_) {
+//            close(chan->fd());
+//            delete chan;
+//        }
     }
 
     void Server::HandleAccept() {
@@ -45,25 +45,27 @@ namespace Network {
         }, [this](Channel* chan) {
             HandleWrite(chan);
         });
+        conn->enableRW();
         loop_->getPoller()->RegisterChannel(conn);
-        conn_.insert(conn);
+//        conn_.insert(conn);
     }
 
     void Server::HandleRead(Channel *chan) {
-        char buff[2046];
-        memset(buff, 0, sizeof(buff));
-        uint32_t bytes = socket_->Read(chan->fd(), buff, 2);
-
-        if (bytes == 0) {
-            close(chan->fd());
-            conn_.erase(chan);
-            delete chan;
-        } else {
-            buff[bytes] = '\0';
-            printf("%p :] bytes: %d :)%s", chan, bytes, buff);
-            char send[]="Hello world\n";
-            socket_->Write(chan->fd(), send, sizeof(send));
-        }
+//        char buff[2046];
+//        memset(buff, 0, sizeof(buff));
+//        uint32_t bytes = socket_->Read(chan->fd(), buff, 2);
+//
+//        if (bytes == 0) {
+//            close(chan->fd());
+//            conn_.erase(chan);
+//            delete chan;
+//        } else {
+//            buff[bytes] = '\0';
+//            printf("%p :] bytes: %d :)%s", chan, bytes, buff);
+//            char send[]="Hello world\n";
+//            socket_->Write(chan->fd(), send, sizeof(send));
+//        }
+        print(chan->getIO().getInput().begin());
     }
 
     void Server::HandleWrite(Channel *chan) {

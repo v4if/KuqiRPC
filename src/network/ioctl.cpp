@@ -1,0 +1,79 @@
+//
+// Created by root on 9/26/17.
+//
+#include "ioctl.hpp"
+
+namespace Network {
+    IO::IO(int fd):fd_(fd) {}
+    IO::~IO() {}
+
+    int IO::fd() {
+        return fd_;
+    }
+
+    uint32_t IO::Read(char* data, uint32_t len) {
+        uint32_t cnt = 0;
+        ssize_t r;
+        for (; cnt < len && (r = read(fd_, data + cnt, len - cnt));) {
+            if (r == -1) {
+                if (errno == EINTR)
+                    continue;
+                if (errno == EAGAIN || errno == EWOULDBLOCK)
+                    break;
+                else
+                    printf("read error, %s :(\n", strerror(errno));
+                break;
+            }
+            cnt += r;
+        }
+
+        return cnt;
+    }
+
+    uint32_t IO::Write(char* data, uint32_t len) {
+        uint32_t cnt = 0;
+        ssize_t r;
+        for (;cnt < len && (r = write(fd_, data + cnt, len - cnt));) {
+            if (r == -1) {
+                if (errno == EINTR)
+                    continue;
+                if (errno == EAGAIN || errno == EWOULDBLOCK)
+                    break;
+                else
+                    printf("write error, %s :(\n", strerror(errno));
+                break;
+            }
+            cnt += r;
+        }
+
+        return cnt;
+    }
+
+    uint32_t IO::tryRead() {
+//        回退指针
+        input_.rewind();
+
+        uint32_t nbytes = 0;
+        uint32_t len = input_.canWrite();
+        uint32_t bytes = Read((char*)input_.end(), len);
+        input_.advanceTail(bytes);
+
+        nbytes += bytes;
+        while (bytes == len) {
+            input_.adjust(input_.cap() << 1);
+            len = input_.canWrite();
+            bytes = Read((char*)input_.end(), len);
+            input_.advanceTail(bytes);
+            nbytes += bytes;
+        }
+        return nbytes;
+    }
+
+    uint32_t IO::tryWrite() {
+
+    }
+
+    Buffer& IO::getInput() {
+        return input_;
+    }
+}

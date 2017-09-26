@@ -5,6 +5,7 @@
 #include <functional>
 #include "sys/types.h"
 #include "buffer.hpp"
+#include "ioctl.hpp"
 
 namespace Network {
     class Channel
@@ -13,18 +14,21 @@ namespace Network {
         using Func = std::function<void(Channel*)>;
         Channel(int, uint32_t, Func, Func);
         ~Channel();
-        
+
+        int fd();
         uint32_t events() const;
-        int fd() const;
+
         void read_cb();
         void write_cb();
+        void enableRW();
+        IO& getIO();
+
     private:
-        int fd_;
         uint32_t events_;
         Func read_cb_;
         Func write_cb_;
-        Buffer input_;
-        Buffer output_;
+        IO io_;
+        bool canRW_; //对端是否建立连接
     };
 }
 

@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <cassert>
 #include <cstring>
+#include <string>
 
 /*
  * 内存泄露检测
@@ -19,8 +20,6 @@ public:
     // Hash Storage
     #define HASH_TABLE_SIZE 1024
     #define HASH(x) ((x & 0x3FF) % HASH_TABLE_SIZE)
-
-    typedef enum { False, True } RetType;
 
 //    这里没有用std::map进行底层存储，运行时会陷入new的嵌套
     struct bucket {
@@ -117,5 +116,10 @@ inline void operator delete[](void* ptr){
 
 #define new DEBUG_NEW
 #define DEBUG_NEW new(__FILE__, __LINE__)
+
+#define print(message) \
+    printf("%s:%d %s", __FILE__, __LINE__, message);
+#define printLn(message) \
+    printf("%s:%d %s", __FILE__, __LINE__, message);
 
 #endif //KUQIKV_DEBUG_NEW_HPP_H

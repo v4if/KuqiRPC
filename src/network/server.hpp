@@ -1,10 +1,10 @@
 #ifndef _SERVER_HPP_        
 #define _SERVER_HPP_    
 
-#include <set>
 #include "eventloop.hpp"
 #include "socket.hpp"
 #include "channel.hpp"
+#include "../include/debug_new.hpp"
 
 namespace Network {
     class Server : public KuqiKV::NoCopy
@@ -21,7 +21,6 @@ namespace Network {
         EventLoop* loop_;
         Socket* socket_;
         Channel* listen_;
-        std::set<Channel*> conn_;
 
         void HandleAccept();
         void HandleRead(Channel *chan);

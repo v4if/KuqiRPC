@@ -6,6 +6,7 @@
 #include "sys/types.h"
 #include "channel.hpp"
 #include "socket.hpp"
+#include "../include/debug_new.hpp"
 
 namespace Network{
 

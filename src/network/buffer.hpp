@@ -22,9 +22,14 @@ namespace Network {
         uint32_t size();
         void* begin();
         void* end();
+        void advanceTail(uint32_t len); //调整尾指针
+        void advanceHead(uint32_t len); //调整头指针
 
-        uint32_t read(void* buff, uint32_t nbytes); // 从缓冲区读数据
+        uint32_t read(void* buff, uint32_t nbytes); //从缓冲区读数据
         uint32_t write(const void* buff, uint32_t nbytes);
+
+        void rewind(); //把指针从现在读取的位置，重新回到开头
+        uint32_t canWrite(); //能写入的数据大小
 
         void adjust(uint32_t capacity); // 调整缓冲大小
     private:

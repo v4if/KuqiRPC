@@ -5,7 +5,6 @@
 #include <cstring>
 #include <stdlib.h>
 #include <cassert>
-#include <iostream>
 #include "buffer.hpp"
 
 namespace Network {
@@ -74,5 +73,27 @@ namespace Network {
         begin_ = 0;
         end_ = size_;
         cap_ = capacity;
+    }
+
+    void Buffer::rewind() {
+        begin_ = 0;
+        end_ = 0;
+        size_ = 0;
+    }
+
+    uint32_t Buffer::canWrite() {
+        return cap_ - size_;
+    }
+
+    void Buffer::advanceTail(uint32_t len) {
+        assert(end_ + len <= cap_);
+        end_ += len;
+        size_ += len;
+    }
+
+    void Buffer::advanceHead(uint32_t len) {
+        assert(len <= size_);
+        begin_ += len;
+        size_ -= len;
     }
 }
