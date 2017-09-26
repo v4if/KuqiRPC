@@ -1,0 +1,13 @@
+注意循环include
+ET|LT模式：LT模式不读取下次继续触发，自动添加到队列中
+lambda捕获
+
+buffer 应用层缓冲
+std::allocator
+
+Nocopy
+
+全局对象初始化static
+
+// 头文件中函数实现只能inline
+注意头文件规则  https://zybuluo.com/uuprince/note/81709

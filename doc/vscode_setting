@@ -1,0 +1,19 @@
+## File->Preference->Setting
+```json
+// Place your settings in this file to overwrite the default settings
+{
+  "editor.tabSize": 4,
+  "editor.rulers": [
+    145
+  ],
+  "editor.fontFamily": "Yahei monaco",
+  "editor.fontSize": 16,
+  "editor.wordWrap": "on"
+}
+```
+
+## extension tools
+cpp-tools
+c++ intellisense
+c/c++ clang command adapter
+c/cpp snippets
