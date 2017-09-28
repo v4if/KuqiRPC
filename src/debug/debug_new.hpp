@@ -29,7 +29,7 @@ public:
         size_t size;
     };
 
-    MemoryCheck() {}
+    MemoryCheck() {printf("MC\n");}
     ~MemoryCheck() {
         bucket* prev = NULL;
         for (int i = 0; i < HASH_TABLE_SIZE; ++i) {
@@ -95,24 +95,13 @@ private:
     bucket* pBucket[HASH_TABLE_SIZE];
 };
 
-static MemoryCheck MC;
+extern  void* operator new(size_t size, const char* file, int line);
 
-// 头文件中函数实现只能inline
-inline void* operator new(size_t size, const char* file, int line){
-    return MC.put_(size, file, line);
-}
+extern  void* operator new[](size_t size, const char* file, int line);
 
-inline void* operator new[](size_t size, const char* file, int line){
-    return MC.put_(size, file, line);
-}
+extern  void operator delete(void* ptr);
 
-inline void operator delete(void* ptr){
-    MC.delete_(ptr);
-}
-
-inline void operator delete[](void* ptr){
-    MC.delete_(ptr);
-}
+extern  void operator delete[](void* ptr);
 
 #define new DEBUG_NEW
 #define DEBUG_NEW new(__FILE__, __LINE__)
