@@ -6,7 +6,7 @@
 #include "sys/types.h"
 #include "channel.hpp"
 #include "socket.hpp"
-#include "../include/debug_new.hpp"
+#include "../debug/debug_new.hpp"
 
 namespace Network{
 
@@ -18,9 +18,9 @@ namespace Network{
         Poller();
         ~Poller();
 
-        void RegisterChannel(Channel*);
-        void UnregisterChannel(Channel*);
-        void BackendPoll(int ms);
+        void registerChannel(Channel*);
+        void unregisterChannel(Channel*);
+        void backendPoll(int ms);
     private:
         int fd_;
         struct epoll_event events_[MaxEvents];

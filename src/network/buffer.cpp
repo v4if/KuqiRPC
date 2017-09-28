@@ -8,18 +8,23 @@
 #include "buffer.hpp"
 
 namespace Network {
-    Buffer::Buffer():data_(new char[InitSize]), cap_(InitSize), size_(0), begin_(0), end_(0) {}
+    Buffer::Buffer():data_(new char[InitSize + 1]), cap_(InitSize), size_(0), begin_(0), end_(0) {}
 
     Buffer::~Buffer() {
         delete[] data_;
     }
 
-    void* Buffer::begin() {
+    char* Buffer::begin() {
         return data_ + begin_;
     }
 
-    void* Buffer::end() {
+    char* Buffer::end() {
         return data_ + end_;
+    }
+
+    char* Buffer::data() {
+        data_[end_] = '\0';
+        return data_ + begin_;
     }
 
     uint32_t Buffer::size() {
@@ -55,7 +60,7 @@ namespace Network {
             adjust(expand);
         }
 
-        assert(cap_ > size_ + nbytes);
+        assert(cap_ >= size_ + nbytes);
         memcpy(data_ + begin_, buff, nbytes);
         end_ += nbytes;
         size_ += nbytes;
@@ -63,7 +68,7 @@ namespace Network {
     }
 
     void Buffer::adjust(uint32_t capacity) {
-        char* buff = new char[capacity];
+        char* buff = new char[capacity + 1];
 
         assert(buff != NULL);
 
@@ -95,5 +100,9 @@ namespace Network {
         assert(len <= size_);
         begin_ += len;
         size_ -= len;
+
+        memmove(data_, data_ + begin_, size_);
+        begin_ = 0;
+        end_ = size_;
     }
 }

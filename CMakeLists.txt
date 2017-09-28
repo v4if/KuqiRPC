@@ -4,7 +4,9 @@ project(KuqiKV)
 set(CMAKE_CXX_STANDARD 11)
 
 set(Network_SRC
-        src/include/debug_new.hpp
+        src/debug/debug_new.hpp
+        src/debug/debug_new.cpp
+        src/debug/memcheck.hpp
         src/include/nocopy.hpp
         src/network/channel.cpp
         src/network/channel.hpp
@@ -19,17 +21,21 @@ set(Network_SRC
         src/network/buffer.cpp
         src/network/buffer.hpp
         src/network/ioctl.cpp
-        src/network/ioctl.hpp)
+        src/network/ioctl.hpp )
 
-set(Rpc_SRC
-        src/rpc/proto.h
-        src/rpc/rpc.cpp
-        src/rpc/rpc.h)
+set(Memory_Leak_SRC
+        src/debug/debug_new.hpp
+        src/debug/debug_new.cpp
+        src/network/buffer.cpp
+        src/network/buffer.hpp)
 
+set(Network_Buffer_SRC
+        src/debug/debug_new.hpp
+        src/debug/debug_new.cpp
+        src/network/buffer.cpp
+        src/network/buffer.hpp)
 
-
-add_executable(Network_Buffer_Test test/network_buffer.cpp src/network/buffer.cpp src/network/buffer.hpp)
+add_executable(Pointer_Plus_Test test/pointer_plus.cpp)
 add_executable(Network_Test ${Network_SRC} test/network.cpp)
-add_executable(Rpc_Test ${Network_SRC} test/rpc.cpp)
-
-add_executable(Memory_Leak_Test src/include/debug_new.hpp test/memory_leak.cpp test/pointer_plus.cpp)
+add_executable(Memory_Leak_Test ${Memory_Leak_SRC} test/memory_leak.cpp)
+add_executable(Network_Buffer_Test ${Network_Buffer_SRC} test/network_buffer.cpp)

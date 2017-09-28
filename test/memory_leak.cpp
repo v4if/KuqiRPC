@@ -2,7 +2,8 @@
 // Created by root on 9/25/17.
 //
 #include <iostream>
-#include "../src/include/debug_new.hpp"
+#include "../src/debug/debug_new.hpp"
+#include "../src/network/buffer.hpp"
 
 #define HELPER(x) #x
 #define PRINT_MACRO(x) #x " = " HELPER(x)
@@ -23,6 +24,10 @@ int main() {
 
     Test* t = new Test;
     std::cout << t->data() << std::endl;
+
+    Network::Buffer bf;
+
+//    getchar();
 
     return 0;
 }

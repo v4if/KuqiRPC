@@ -2,8 +2,8 @@
 #include "channel.hpp"
 
 namespace Network {
-    Channel::Channel(int fd, uint32_t events, Func read_cb, Func write_cb): 
-        io_(fd), events_(events), read_cb_(read_cb), write_cb_(write_cb), canRW_(false) {}
+    Channel::Channel(int fd, uint32_t events, Func read_cb):
+        io_(fd), events_(events), read_cb_(read_cb), canRW_(false) {}
 
     Channel::~Channel() {}
 
@@ -25,13 +25,15 @@ namespace Network {
     void Channel::write_cb() {
         if (canRW_)
             io_.tryWrite();
-
-        if (write_cb_)
-            write_cb_(this);
     }
 
     void Channel::enableRW() {
         canRW_ = true;
+    }
+
+    void Channel::sendOut(const char *data) {
+        io_.getOutput().write(data, strlen(data));
+        io_.tryWrite();
     }
 
     IO& Channel::getIO() {

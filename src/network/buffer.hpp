@@ -8,7 +8,7 @@
 
 #include <cstdint>
 #include "../include/nocopy.hpp"
-#include "../include/debug_new.hpp"
+#include "../debug/debug_new.hpp"
 
 namespace Network {
     class Buffer : public KuqiKV::NoCopy {
@@ -20,8 +20,9 @@ namespace Network {
 
         uint32_t cap();
         uint32_t size();
-        void* begin();
-        void* end();
+        char* begin();
+        char* end();
+        char* data();
         void advanceTail(uint32_t len); //调整尾指针
         void advanceHead(uint32_t len); //调整头指针
 

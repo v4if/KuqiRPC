@@ -2,6 +2,7 @@
 #define _SOCKET_HPP_    
 
 #include "sys/types.h"
+#include "../debug/debug_new.hpp"
 
 namespace Network {
     enum { BackLog = 32 };

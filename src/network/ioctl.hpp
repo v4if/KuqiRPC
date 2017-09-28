@@ -11,6 +11,7 @@
 #include <cerrno>
 #include <cstring>
 #include "buffer.hpp"
+#include "../debug/debug_new.hpp"
 
 namespace Network {
     class IO {
@@ -22,6 +23,7 @@ namespace Network {
         uint32_t tryRead();
         uint32_t tryWrite();
         Buffer& getInput();
+        Buffer& getOutput();
     private:
         int fd_;
         Buffer input_;

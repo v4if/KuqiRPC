@@ -15,8 +15,9 @@ namespace Network {
 
     void EventLoop::loop() {
         while (running_) {
-            poller_->BackendPoll(-1);
+            poller_->backendPoll(-1);
         }
+        // 做一些清理工作
     }
 
     void EventLoop::exit() {

@@ -13,14 +13,14 @@ namespace Network {
         close(fd_);
     }
 
-    void Poller::RegisterChannel(Channel* chan) {
+    void Poller::registerChannel(Channel* chan) {
         struct epoll_event event;
         event.events = chan->events();
         event.data.ptr = chan;
         assert(!epoll_ctl(fd_, EPOLL_CTL_ADD, chan->fd(), &event));
     }
 
-    void Poller::UnregisterChannel(Channel* chan) {
+    void Poller::unregisterChannel(Channel* chan) {
         struct epoll_event event;
         memset(&event, 0, sizeof(event));
         event.events = chan->events();
@@ -28,7 +28,7 @@ namespace Network {
         assert(!epoll_ctl(fd_, EPOLL_CTL_DEL, chan->fd(), &event));
     }
 
-    void Poller::BackendPoll(int ms) {
+    void Poller::backendPoll(int ms) {
         int ready = epoll_wait(fd_, events_, MaxEvents, ms);
         assert(!(ready == -1 && errno != EINTR));
 

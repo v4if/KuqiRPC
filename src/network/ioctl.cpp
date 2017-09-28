@@ -55,14 +55,14 @@ namespace Network {
 
         uint32_t nbytes = 0;
         uint32_t len = input_.canWrite();
-        uint32_t bytes = Read((char*)input_.end(), len);
+        uint32_t bytes = Read(input_.end(), len);
         input_.advanceTail(bytes);
 
         nbytes += bytes;
         while (bytes == len) {
             input_.adjust(input_.cap() << 1);
             len = input_.canWrite();
-            bytes = Read((char*)input_.end(), len);
+            bytes = Read(input_.end(), len);
             input_.advanceTail(bytes);
             nbytes += bytes;
         }
@@ -70,10 +70,15 @@ namespace Network {
     }
 
     uint32_t IO::tryWrite() {
-
+        uint32_t bytes = Write(output_.begin(), output_.size());
+        output_.advanceHead(bytes);
     }
 
     Buffer& IO::getInput() {
         return input_;
+    }
+
+    Buffer& IO::getOutput() {
+        return output_;
     }
 }

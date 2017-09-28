@@ -1,8 +1,8 @@
 #include <cassert>
 #include <unistd.h>
 #include <cstring>
+#include <algorithm>
 #include "server.hpp"
-#include <stdio.h>
 
 namespace Network {
     Server::Server(EventLoop* loop, int port):listen_port_(port), loop_(loop), socket_(new Socket()){}
@@ -12,18 +12,18 @@ namespace Network {
         delete socket_;
         delete listen_;
 
-//        for (Channel* chan : conn_) {
-//            close(chan->fd());
-//            delete chan;
-//        }
+        for (Channel* chan : conn_) {
+            close(chan->fd());
+            delete chan;
+        }
     }
 
     void Server::Start() {
         assert(socket_->Bind(listen_port_) == 0 && socket_->Listen() == 0);
         listen_ = new Channel(socket_->fd(), EPOLLIN|EPOLLET, [this](Channel*){
             HandleAccept();
-        }, static_cast<Channel::Func>(0));
-        loop_->getPoller()->RegisterChannel(listen_);
+        });
+        loop_->getPoller()->registerChannel(listen_);
     }
 
     void Server::Close() {
@@ -31,44 +31,34 @@ namespace Network {
         delete socket_;
         delete listen_;
 
-//        for (Channel* chan : conn_) {
-//            close(chan->fd());
-//            delete chan;
-//        }
+        for (Channel* chan : conn_) {
+            close(chan->fd());
+            delete chan;
+        }
     }
 
     void Server::HandleAccept() {
         int fd = socket_->Accept();
         socket_->SetNonBlock(fd);
-        Channel* conn = new Channel(fd, EPOLLIN|EPOLLOUT|EPOLLET, [this](Channel* chan){
-            HandleRead(chan);
-        }, [this](Channel* chan) {
-            HandleWrite(chan);
+        Channel* conn = new Channel(fd, EPOLLIN|EPOLLOUT|EPOLLET, [this](Channel* chan) {
+            Buffer& input = chan->getIO().getInput();
+            if (input.size() == 0) {
+                // 对端关闭
+                close(chan->fd());
+                delete chan;
+                conn_.erase(std::find(conn_.begin(), conn_.end(), chan));
+            } else {
+                on_read_(chan);
+            }
         });
+
+        loop_->getPoller()->registerChannel(conn);
         conn->enableRW();
-        loop_->getPoller()->RegisterChannel(conn);
-//        conn_.insert(conn);
+        conn_.push_back(conn);
     }
 
-    void Server::HandleRead(Channel *chan) {
-//        char buff[2046];
-//        memset(buff, 0, sizeof(buff));
-//        uint32_t bytes = socket_->Read(chan->fd(), buff, 2);
-//
-//        if (bytes == 0) {
-//            close(chan->fd());
-//            conn_.erase(chan);
-//            delete chan;
-//        } else {
-//            buff[bytes] = '\0';
-//            printf("%p :] bytes: %d :)%s", chan, bytes, buff);
-//            char send[]="Hello world\n";
-//            socket_->Write(chan->fd(), send, sizeof(send));
-//        }
-        print(chan->getIO().getInput().begin());
-    }
 
-    void Server::HandleWrite(Channel *chan) {
-
+    void Server::onRead(FuncType func) {
+        on_read_ = func;
     }
 }

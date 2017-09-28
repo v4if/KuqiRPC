@@ -6,13 +6,14 @@
 #include "sys/types.h"
 #include "buffer.hpp"
 #include "ioctl.hpp"
+#include "../debug/debug_new.hpp"
 
 namespace Network {
     class Channel
     {
     public:
         using Func = std::function<void(Channel*)>;
-        Channel(int, uint32_t, Func, Func);
+        Channel(int, uint32_t, Func);
         ~Channel();
 
         int fd();
@@ -20,6 +21,7 @@ namespace Network {
 
         void read_cb();
         void write_cb();
+        void sendOut(const char*);
         void enableRW();
         IO& getIO();
 
