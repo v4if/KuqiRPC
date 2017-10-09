@@ -10,22 +10,19 @@
 #include <new>
 #include "memcheck.hpp"
 
-extern void* operator new(size_t size, const char* file, int line);
-
-extern void* operator new[](size_t size, const char* file, int line);
-
-extern void operator delete(void* ptr);
-
-extern void operator delete[](void* ptr);
-
-extern MemoryCheck MC;
+void* operator new(size_t size, const char* file, int line);
+void* operator new[](size_t size, const char* file, int line);
 
 #define new DEBUG_NEW
 #define DEBUG_NEW new(__FILE__, __LINE__)
 
+#define malloc(s) ((void*)(new char[s]))
+#define free(p) delete[] (char*)(p)
+
+extern MemoryCheck MC;
 #define Print(message) \
     printf("%s:%d %s", __FILE__, __LINE__, message);
 #define PrintLn(message) \
-    printf("%s:%d %s", __FILE__, __LINE__, message);
+    printf("%s:%d %s\n", __FILE__, __LINE__, message);
 
 #endif //KUQIKV_DEBUG_NEW_HPP_H

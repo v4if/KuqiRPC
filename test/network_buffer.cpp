@@ -1,19 +1,22 @@
 #include <iostream>
+#include "../src/debug/debug_new.hpp"
 #include "../src/network/buffer.hpp"
 
-const int magic = 0x06;
+const int randseeds = 0x06;
 
 class Test {
 public:
     Network::Buffer buff;
 };
-
 int main()
 {
     std::string out;
 
     char temp[] = "Hello World";
     Network::Buffer buff;
+    std::cout << buff.cap() << buff.size() << std::endl;
+    out = "cap: " + std::to_string(buff.cap()) + ", size:eeeeeeeeeeeeeeeeeeeeeeeeee " + std::to_string(buff.size()) + "\n";
+    std::to_string(buff.size());
     out = "cap: " + std::to_string(buff.cap()) + ", size: " + std::to_string(buff.size()) + "\n";
     std::cout << out;
 
@@ -22,7 +25,7 @@ int main()
     out = "cap: " + std::to_string(buff.cap()) + ", size: " + std::to_string(buff.size()) + "\n";
     std::cout << out;
 
-    uint32_t nbytes = buff.read(temp, sizeof(temp) + magic);
+    uint32_t nbytes = buff.read(temp, sizeof(temp) + randseeds);
     std::cout << "read bytes: " << nbytes << " " << temp << std::endl;
     std::cout << buff.begin() << " " << buff.end() << std::endl;
     out = "cap: " + std::to_string(buff.cap()) + ", size: " + std::to_string(buff.size()) + "\n";

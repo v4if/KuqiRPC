@@ -32,7 +32,8 @@ namespace Network {
     }
 
     void Channel::sendOut(const char *data) {
-        io_.getOutput().write(data, strlen(data));
+        Buffer& output = io_.getOutput();
+        output.write(data, strlen(data));
         io_.tryWrite();
     }
 

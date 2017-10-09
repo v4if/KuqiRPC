@@ -1,11 +1,12 @@
 #include <iostream>
+#include <algorithm>
 #include "../src/network/eventloop.hpp"
 #include "../src/network/server.hpp"
 
 int main()
 {
     Network::EventLoop looper;
-    Network::Server serv(&looper, 8000);
+    Network::Server serv(&looper, 8080);
     serv.Start();
 
     MC.atExit([&]() {

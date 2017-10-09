@@ -14,6 +14,7 @@ namespace Network {
     }
 
     void EventLoop::loop() {
+        uint32_t i = 1;
         while (running_) {
             poller_->backendPoll(-1);
         }

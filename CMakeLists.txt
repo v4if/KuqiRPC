@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.7)
 project(KuqiKV)
 
 set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_FLAGS -g)
 
 set(Network_SRC
         src/debug/debug_new.hpp
@@ -26,16 +27,24 @@ set(Network_SRC
 set(Memory_Leak_SRC
         src/debug/debug_new.hpp
         src/debug/debug_new.cpp
+        src/debug/memcheck.hpp
         src/network/buffer.cpp
-        src/network/buffer.hpp)
+        src/network/buffer.hpp )
 
 set(Network_Buffer_SRC
         src/debug/debug_new.hpp
         src/debug/debug_new.cpp
         src/network/buffer.cpp
-        src/network/buffer.hpp)
+        src/network/buffer.hpp
+        )
+
+set(RPC_SRC
+        ${Network_SRC}
+        src/rpc/rpc_server.hpp
+        src/rpc/rpc_server.cpp)
 
 add_executable(Pointer_Plus_Test test/pointer_plus.cpp)
 add_executable(Network_Test ${Network_SRC} test/network.cpp)
 add_executable(Memory_Leak_Test ${Memory_Leak_SRC} test/memory_leak.cpp)
 add_executable(Network_Buffer_Test ${Network_Buffer_SRC} test/network_buffer.cpp)
+add_executable(RPC_Test ${RPC_SRC} test/rpc_server.cpp)

@@ -2,8 +2,9 @@
 // Created by root on 9/25/17.
 //
 #include <iostream>
+#include <vector>
 #include "../src/debug/debug_new.hpp"
-#include "../src/network/buffer.hpp"
+
 
 #define HELPER(x) #x
 #define PRINT_MACRO(x) #x " = " HELPER(x)
@@ -12,20 +13,23 @@
 
 class Test{
 public:
-    Test(): data_(0x6){}
-    int data() { return data_; }
-private:
-    int data_;
+    Test(): data_(new int[2]){}
+    int* data_;
 };
 
 int main() {
     char* buff = new char[6];
     delete[] buff;
 
-    Test* t = new Test;
-    std::cout << t->data() << std::endl;
+    Test* b = new Test;
+    delete(b);
+    char* a= (char*)malloc(4);
 
-    Network::Buffer bf;
+    char* c = new char[11];
+
+    std::string out;
+    std::cout << out.capacity() << std::endl;
+    out = "123456789abcdef\n";
 
 //    getchar();
 

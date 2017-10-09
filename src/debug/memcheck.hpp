@@ -14,7 +14,7 @@
 class MemoryCheck{
 public:
     // Hash Storage
-#define HASH_TABLE_SIZE 1024
+#define HASH_TABLE_SIZE 3
 #define HASH(x) ((x & 0x3FF) % HASH_TABLE_SIZE)
 
 //    这里没有用std::map进行底层存储，运行时会陷入new的嵌套
@@ -48,7 +48,7 @@ public:
             }
         }
         printf("new count: %d, delete count: %d\n", new_cnt_, delete_cnt_);
-        assert(new_cnt_ == delete_cnt_);
+//        assert(new_cnt_ == delete_cnt_);
     }
 
     void* put_(size_t size, const char* file, int line) {
@@ -92,7 +92,7 @@ public:
             head = head->next;
         }
 
-//        assert(!"delete raw memory or double delete an address :(");
+        assert(!"delete raw memory or double delete an address :(");
     }
 
     typedef std::function<void(void)> FuncType;
