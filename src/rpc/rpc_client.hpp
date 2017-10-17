@@ -7,6 +7,7 @@
 
 #include "../network/client.hpp"
 #include "rpc.hpp"
+#include "../debug/debug_new.hpp"
 
 namespace RPC {
     class RpcClient: public Network::Client {

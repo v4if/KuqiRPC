@@ -5,6 +5,7 @@
 #ifndef KUQIKV_RPC_OBJ_HPP
 #define KUQIKV_RPC_OBJ_HPP
 
+#include "../src/debug/debug_new.hpp"
 class Rpc_Obj {
 public:
     struct Args{

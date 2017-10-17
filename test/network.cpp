@@ -2,6 +2,7 @@
 #include <algorithm>
 #include "../src/network/eventloop.hpp"
 #include "../src/network/server.hpp"
+#include "../src/debug/debug_new.hpp"
 
 int main()
 {

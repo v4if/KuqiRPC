@@ -5,8 +5,10 @@
 #ifndef KUQIKV_DB_HPP
 #define KUQIKV_DB_HPP
 
+
 #include <iostream>
 #include <unordered_map>
+#include "../debug/debug_new.hpp"
 
 namespace KuqiKV {
     class DB {

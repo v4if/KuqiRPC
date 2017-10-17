@@ -3,7 +3,6 @@
 //
 #include "../src/rpc/rpc_server.hpp"
 #include "rpc_obj.hpp"
-#include "../src/kv/db.hpp"
 
 int main() {
     Network::EventLoop looper;

@@ -1,7 +1,7 @@
 //
 // Created by root on 9/26/17.
 //
-#include <iostream>
+#include "../src/debug/debug_new.hpp"
 
 int main () {
     int* v = (int*)malloc(sizeof(int));

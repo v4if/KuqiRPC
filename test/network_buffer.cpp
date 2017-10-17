@@ -1,8 +1,5 @@
 #include <iostream>
-#include "../src/debug/debug_new.hpp"
 #include "../src/network/buffer.hpp"
-
-const int randseeds = 0x06;
 
 class Test {
 public:

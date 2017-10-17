@@ -8,8 +8,8 @@
 
 #include <unordered_map>
 #include "../network/server.hpp"
-#include "../debug/debug_new.hpp"
 #include "rpc.hpp"
+#include "../debug/debug_new.hpp"
 
 namespace RPC {
     class RpcServer: public Network::Server{

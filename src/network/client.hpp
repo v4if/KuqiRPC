@@ -6,10 +6,10 @@
 #define KUQIKV_CLIENT_HPP
 
 
-#include "../debug/debug_new.hpp"
 #include "../include/nocopy.hpp"
 #include "socket.hpp"
 #include "eventloop.hpp"
+#include "../debug/debug_new.hpp"
 
 namespace Network {
     class Client: public NoCopy {

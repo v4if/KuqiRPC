@@ -4,10 +4,13 @@ project(KuqiKV)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS -g)
 
-set(Network_SRC
+set(Debug_SRC
         src/debug/debug_new.hpp
         src/debug/debug_new.cpp
-        src/debug/memcheck.hpp
+        src/debug/memcheck.hpp)
+
+set(Network_SRC
+        ${Debug_SRC}
         src/include/nocopy.hpp
         src/network/channel.cpp
         src/network/channel.hpp
@@ -55,7 +58,7 @@ set(RPC_Client_SRC
         src/kv/db.cpp
         src/rpc/rpc_client.cpp src/rpc/rpc_client.hpp test/rpc_obj.hpp)
 
-add_executable(Pointer_Plus_Test test/pointer_plus.cpp)
+add_executable(Pointer_Plus_Test test/pointer_plus.cpp ${Debug_SRC})
 add_executable(Network_Test ${Network_SRC} test/network.cpp src/include/lockguard.hpp)
 add_executable(Memory_Leak_Test ${Memory_Leak_SRC} test/memory_leak.cpp)
 add_executable(Network_Buffer_Test ${Network_Buffer_SRC} test/network_buffer.cpp)

@@ -6,6 +6,7 @@
 #define KUQIKV_RPC_HPP
 
 #include <functional>
+#include "../debug/debug_new.hpp"
 
 namespace RPC {
     class RPC_Impl {
