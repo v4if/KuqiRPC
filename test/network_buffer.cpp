@@ -15,7 +15,7 @@ int main()
     char temp[] = "Hello World";
     Network::Buffer buff;
     std::cout << buff.cap() << buff.size() << std::endl;
-    out = "cap: " + std::to_string(buff.cap()) + ", size:eeeeeeeeeeeeeeeeeeeeeeeeee " + std::to_string(buff.size()) + "\n";
+    out = "cap: " + std::to_string(buff.cap()) + ", size: " + std::to_string(buff.size()) + "\n";
     std::to_string(buff.size());
     out = "cap: " + std::to_string(buff.cap()) + ", size: " + std::to_string(buff.size()) + "\n";
     std::cout << out;
@@ -25,7 +25,7 @@ int main()
     out = "cap: " + std::to_string(buff.cap()) + ", size: " + std::to_string(buff.size()) + "\n";
     std::cout << out;
 
-    uint32_t nbytes = buff.read(temp, sizeof(temp) + randseeds);
+    uint32_t nbytes = buff.read(temp, sizeof(temp));
     std::cout << "read bytes: " << nbytes << " " << temp << std::endl;
     std::cout << buff.begin() << " " << buff.end() << std::endl;
     out = "cap: " + std::to_string(buff.cap()) + ", size: " + std::to_string(buff.size()) + "\n";

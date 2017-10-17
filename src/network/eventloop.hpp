@@ -1,14 +1,12 @@
 #ifndef _EVENTLOOP_HPP_
 #define _EVENTLOOP_HPP_
 
-#include <memory>  //unique_ptr
-#include <unordered_map>
 #include "poller.hpp"
 #include "channel.hpp"
 #include "../debug/debug_new.hpp"
 
 namespace Network {
-    class EventLoop : public KuqiKV::NoCopy
+    class EventLoop : public NoCopy
     {
     public:
         EventLoop();

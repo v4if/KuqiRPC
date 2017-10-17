@@ -1,6 +1,7 @@
 #ifndef _SOCKET_HPP_        
-#define _SOCKET_HPP_    
+#define _SOCKET_HPP_
 
+#include <arpa/inet.h>
 #include "sys/types.h"
 #include "../debug/debug_new.hpp"
 
@@ -15,6 +16,13 @@ namespace Network {
         int Bind(uint16_t);
         int Listen();
         int Accept();
+
+        struct EndPoint{
+            const char* address_;
+            uint16_t port_;
+        };
+
+        bool Connect(const EndPoint &end_point);
         int Close();
 
         int SetNonBlock(int fd);

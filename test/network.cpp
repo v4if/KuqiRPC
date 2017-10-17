@@ -15,12 +15,9 @@ int main()
 
     serv.onRead([](Network::Channel* chan){
         Network::Buffer& input = chan->getIO().getInput();
-        char buff[1024];
-        int bytes = sprintf(buff, "%d %d %s", input.cap(), input.size(), input.data());
-        Print(buff);
+        std::cout << input.data() << std::endl;
 
-        buff[bytes] = '\0';
-        chan->sendOut(buff);
+        chan->sendOut(input.begin(), input.size());
     });
 
     looper.loop();

@@ -5,15 +5,18 @@
 #ifndef KUQIKV_DB_HPP
 #define KUQIKV_DB_HPP
 
+#include <iostream>
+#include <unordered_map>
+
 namespace KuqiKV {
     class DB {
-        enum {Bucket_Size = 1024};
     public:
-        std::string Get(std::string key);
-        void Put(std::string key, std::string value);
+        void Get(const int* args, int* future);
+
+        void Put(const int* args, int* future);
 
     private:
-
+        std::unordered_map<std::string, std::string> bucket;
     };
 }
 

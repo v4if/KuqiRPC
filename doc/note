@@ -17,3 +17,5 @@ C++ 一个含有静态全局变量的头文件被包含多次_百度知道
 
 inline 函数  声明 定义 就地定义
 The C++ Programming Language
+
+模板的声明和实现必须写在一起

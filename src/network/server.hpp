@@ -9,7 +9,7 @@
 #include "../debug/debug_new.hpp"
 
 namespace Network {
-    class Server : public KuqiKV::NoCopy
+    class Server : public NoCopy
     {
     public:
         typedef std::function<void(Channel*)> FuncType;
@@ -31,7 +31,6 @@ namespace Network {
 
         void HandleAccept();
     };
-    
 }
 
 #endif //_SERVER_HPP_   

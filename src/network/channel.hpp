@@ -1,7 +1,6 @@
 #ifndef _CHANNEL_HPP_
 #define _CHANNEL_HPP_
 
-#include <memory>  //unique_ptr
 #include <functional>
 #include "sys/types.h"
 #include "buffer.hpp"
@@ -13,7 +12,7 @@ namespace Network {
     {
     public:
         using Func = std::function<void(Channel*)>;
-        Channel(int, uint32_t, Func);
+        Channel(int fd, uint32_t events, Func read_cb);
         ~Channel();
 
         int fd();
@@ -21,8 +20,13 @@ namespace Network {
 
         void read_cb();
         void write_cb();
-        void sendOut(const char*);
-        void enableRW();
+        void sendOut(const void* data, uint32_t len);
+        void sendOut();
+        void enableRead();
+        void enableConn();
+        void disableRead();
+        void disableConn();
+        void disableWrite();
         IO& getIO();
 
     private:
@@ -30,7 +34,9 @@ namespace Network {
         Func read_cb_;
         Func write_cb_;
         IO io_;
-        bool canRW_; //对端是否建立连接
+        bool canRead_; //控制回调
+        bool canWrite_;
+        bool connected_; //控制发送到对端
     };
 }
 

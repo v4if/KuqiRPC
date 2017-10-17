@@ -11,7 +11,7 @@
 #include "../debug/debug_new.hpp"
 
 namespace Network {
-    class Buffer : public KuqiKV::NoCopy {
+    class Buffer : public NoCopy {
     public:
         enum { InitSize = 4 };
 
@@ -25,6 +25,7 @@ namespace Network {
         char* data();
         void advanceTail(uint32_t len); //调整尾指针
         void advanceHead(uint32_t len); //调整头指针
+        void unGet(uint32_t len); //回退指针
 
         uint32_t read(void* buff, uint32_t nbytes); //从缓冲区读数据
         uint32_t write(const void* buff, uint32_t nbytes);

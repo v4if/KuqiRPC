@@ -12,7 +12,6 @@ namespace Network {
     Socket::Socket():fd_(-1) {
         fd_ = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
         assert(fd_ != -1);
-        SetNonBlock(fd_);
     }
     
     Socket::~Socket() {
@@ -55,6 +54,17 @@ namespace Network {
 
         assert(fd != -1);
         return fd;
+    }
+
+    bool Socket::Connect(const EndPoint &end_point)
+    {
+        struct sockaddr_in server;
+        memset(&server, 0, sizeof(server));
+        server.sin_family      = AF_INET;
+        server.sin_port        = htons(end_point.port_);
+        server.sin_addr.s_addr = inet_addr(end_point.address_);
+
+        return !connect(fd_, (const struct sockaddr *)&server, sizeof(server));
     }
 
     int Socket::Close() {

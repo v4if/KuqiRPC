@@ -1,7 +1,9 @@
 //
 // Created by root on 9/26/17.
 //
+#include <mutex>
 #include "ioctl.hpp"
+#include "../include/lockguard.hpp"
 
 namespace Network {
     IO::IO(int fd):fd_(fd) {}
@@ -70,8 +72,17 @@ namespace Network {
     }
 
     uint32_t IO::tryWrite() {
-        uint32_t bytes = Write(output_.begin(), output_.size());
-        output_.advanceHead(bytes);
+        uint32_t len = output_.size();
+        uint32_t bytes = 0;
+        while (bytes < len) {
+            uint32_t n = Write(output_.begin(), output_.size());
+            output_.advanceHead(n);
+            bytes += n;
+        }
+
+        output_.rewind();
+
+        return bytes;
     }
 
     Buffer& IO::getInput() {

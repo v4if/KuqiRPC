@@ -60,9 +60,14 @@ namespace Network {
             }
         });
 
+        conn->enableConn();
+        conn->enableRead();
         loop_->getPoller()->registerChannel(conn);
-        conn->enableRW();
         conn_.push_back(std::move(conn));
+
+//        重新处于监听状态
+        listen_->disableRead();
+        listen_->disableConn();
     }
 
 
