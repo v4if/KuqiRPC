@@ -17,21 +17,22 @@ namespace RPC {
         RpcServer(Network::EventLoop*, int);
         ~RpcServer();
 
-        template <class T1, class T2, class T3>
-        void registerService(std::string method, T1* obj, void (T1::*(func)) (const T2* args, T3* future)){
-            uint32_t h = RPC_Impl::hash(method);
-            if (services_.find(h) != services_.end()) return;
-
-            services_[h] = new RPC_Impl(method, obj, func);
-        }
+        template <typename T1, typename A, typename R>
+        void reg(std::string method, T1 *obj, void (T1::*(func))(const A *a, R *r));
 
     private:
         using Network::Server::onRead;
 
         std::unordered_map<u_int32_t , RPC_Impl*> services_;
-
-
     };
+}
+
+template <typename T1, typename A, typename R>
+void RPC::RpcServer::reg(std::string method, T1 *obj, void (T1::*(func))(const A *a, R *r)){
+    uint32_t proc = RPC_Impl::hash(method);
+    if (services_.find(proc) != services_.end()) return;
+
+    services_[proc] = new RPC_Impl(method, obj, func);
 }
 
 #endif //KUQIKV_RPC_SERVER_HPP

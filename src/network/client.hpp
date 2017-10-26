@@ -6,7 +6,6 @@
 #define KUQIKV_CLIENT_HPP
 
 
-#include "../include/nocopy.hpp"
 #include "socket.hpp"
 #include "eventloop.hpp"
 #include "../debug/debug_new.hpp"

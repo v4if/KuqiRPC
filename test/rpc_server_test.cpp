@@ -14,7 +14,7 @@ int main() {
     });
 
     Rpc_Obj obj;
-    serv.registerService("Rpc_Obj::Add", &obj, &Rpc_Obj::Add);
+    serv.reg("Rpc_Obj::Add", &obj, &Rpc_Obj::Add);
 
     looper.loop();
 

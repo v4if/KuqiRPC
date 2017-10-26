@@ -7,8 +7,8 @@
 
 
 #include <cstdint>
-#include "../include/nocopy.hpp"
 #include "../debug/debug_new.hpp"
+#include "../auxiliary/nocopy.hpp"
 
 namespace Network {
     class Buffer : public NoCopy {
