@@ -13,7 +13,7 @@
 template <class T>
 class Future {
 public:
-    enum Status{pending = 0x0, ready, timeout};
+    enum Status{pending = 0x0, ready};
 
     Future():value_(), status_(pending) {
         pthread_mutex_init(&mutex_, NULL);
@@ -34,16 +34,13 @@ public:
         }
     }
 
-    void SetStatus(Status sta) {
-        ScopedLock ml(&mutex_);
-        status_ = sta;
-    }
-
     void Notify(Marshal &marshal) {
         ScopedLock ml(&mutex_);
-        marshal >> value_;
-        status_ = ready;
-        pthread_cond_signal(&cond_for_ret_);
+        if (status_ == pending) {
+            marshal >> value_;
+            status_ = ready;
+            pthread_cond_signal(&cond_for_ret_);
+        }
     }
 private:
     T value_;

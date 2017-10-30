@@ -18,9 +18,9 @@ namespace RPC {
             if (it != futures_.end()) {
                 FutureFunctor fn = it->second;
                 fn(marshal);
-            }
 
-//        std::cout << input.data() << std::endl;
+                futures_.erase(it);
+            }
         });
     }
 }
