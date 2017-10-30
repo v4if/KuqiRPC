@@ -61,7 +61,7 @@ namespace Network {
 
         nbytes += bytes;
         while (bytes == len) {
-            input_.adjust(input_.cap() << 1);
+            input_.resize(input_.cap() << 1);
             len = input_.canWrite();
             bytes = Read(input_.end(), len);
             input_.advanceTail(bytes);
@@ -84,11 +84,11 @@ namespace Network {
         return bytes;
     }
 
-    Buffer& IO::getInput() {
+    CharBuffer& IO::getInput() {
         return input_;
     }
 
-    Buffer& IO::getOutput() {
+    CharBuffer& IO::getOutput() {
         return output_;
     }
 }

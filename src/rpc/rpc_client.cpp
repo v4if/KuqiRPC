@@ -3,8 +3,24 @@
 //
 
 #include "rpc_client.hpp"
-#include "rpc.hpp"
 
 namespace RPC {
-    RpcClient::RpcClient(Network::EventLoop *loop): Network::Client(loop) {}
+    std::atomic_uint32_t RpcClient::R_Id(0);
+    RpcClient::RpcClient(Network::EventLoop *loop): Network::Client(loop) {
+        onMsg([this](Network::Channel *chan) {
+            Network::IO &io = chan->getIO();
+            Marshal marshal(&io.getInput(), &io.getOutput());
+
+            uint32_t r_id;
+            marshal >> r_id;
+
+            auto it = futures_.find(r_id);
+            if (it != futures_.end()) {
+                FutureFunctor fn = it->second;
+                fn(marshal);
+            }
+
+//        std::cout << input.data() << std::endl;
+        });
+    }
 }

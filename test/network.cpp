@@ -14,8 +14,8 @@ int main()
         looper.exit();
     });
 
-    serv.onRead([](Network::Channel* chan){
-        Network::Buffer& input = chan->getIO().getInput();
+    serv.onMsg([](Network::Channel *chan) {
+        Network::CharBuffer &input = chan->getIO().getInput();
         std::cout << input.data() << std::endl;
 
         chan->sendOut(input.begin(), input.size());

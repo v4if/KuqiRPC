@@ -42,7 +42,7 @@ namespace Network {
 
     void Channel::sendOut(const void *data, uint32_t len) {
         if (connected_) {
-            Buffer& output = io_.getOutput();
+            CharBuffer& output = io_.getOutput();
             output.write(data, len);
             io_.tryWrite();
         }

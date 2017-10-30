@@ -6,7 +6,6 @@
 #include "eventloop.hpp"
 #include "socket.hpp"
 #include "channel.hpp"
-#include "../debug/debug_new.hpp"
 
 namespace Network {
     class Server : public NoCopy
@@ -19,7 +18,7 @@ namespace Network {
 
         void Start();
         void Close();
-        void onRead(FuncType);
+        void onMsg(FuncType);
 
     private:
         int listen_port_;

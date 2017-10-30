@@ -10,8 +10,7 @@
 #include <zconf.h>
 #include <cerrno>
 #include <cstring>
-#include "buffer.hpp"
-#include "../debug/debug_new.hpp"
+#include "charbf.hpp"
 
 namespace Network {
     class IO {
@@ -22,12 +21,12 @@ namespace Network {
         int fd();
         uint32_t tryRead();
         uint32_t tryWrite();
-        Buffer& getInput();
-        Buffer& getOutput();
+        CharBuffer& getInput();
+        CharBuffer& getOutput();
     private:
         int fd_;
-        Buffer input_;
-        Buffer output_;
+        CharBuffer input_;
+        CharBuffer output_;
 
         uint32_t Read(char* data, uint32_t len);
         uint32_t Write(char* data, uint32_t len);

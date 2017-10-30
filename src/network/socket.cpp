@@ -7,11 +7,16 @@
 #include <errno.h>
 #include "socket.hpp"
 #include <stdio.h>
+#include <netinet/tcp.h>
 
 namespace Network {
     Socket::Socket():fd_(-1) {
         fd_ = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
         assert(fd_ != -1);
+
+        int yes = 1;
+        setsockopt(fd_, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes));
+        setsockopt(fd_, IPPROTO_TCP, TCP_NODELAY, &yes, sizeof(yes));
     }
     
     Socket::~Socket() {
@@ -56,13 +61,13 @@ namespace Network {
         return fd;
     }
 
-    bool Socket::Connect(const EndPoint &end_point)
+    bool Socket::Connect(const char *addr, uint16_t port)
     {
         struct sockaddr_in server;
         memset(&server, 0, sizeof(server));
         server.sin_family      = AF_INET;
-        server.sin_port        = htons(end_point.port_);
-        server.sin_addr.s_addr = inet_addr(end_point.address_);
+        server.sin_port        = htons(port);
+        server.sin_addr.s_addr = inet_addr(addr);
 
         return !connect(fd_, (const struct sockaddr *)&server, sizeof(server));
     }

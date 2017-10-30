@@ -3,7 +3,6 @@
 
 #include "poller.hpp"
 #include "channel.hpp"
-#include "../debug/debug_new.hpp"
 
 namespace Network {
     class EventLoop : public NoCopy

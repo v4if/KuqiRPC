@@ -8,17 +8,21 @@
 
 #include "socket.hpp"
 #include "eventloop.hpp"
-#include "../debug/debug_new.hpp"
 
 namespace Network {
     class Client: public NoCopy {
     public:
+        struct EndPoint{
+            const char* address_;
+            uint16_t port_;
+        };
+        
         typedef std::function<void(Channel*)> FuncType;
 
         Client(EventLoop*);
         ~Client();
-        bool connect(const Socket::EndPoint&);
-        void onRead(FuncType func_);
+        bool connect(const EndPoint&);
+        void onMsg(FuncType func_);
         Channel* getChannel();
 
     private:

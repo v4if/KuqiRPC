@@ -4,13 +4,8 @@ project(KuqiKV)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS -g)
 
-set(Debug_SRC
-        src/debug/debug_new.hpp
-        src/debug/debug_new.cpp
-        src/debug/memcheck.hpp)
 
 set(Network_SRC
-        ${Debug_SRC}
         src/auxiliary/nocopy.hpp
         src/network/channel.cpp
         src/network/channel.hpp
@@ -22,43 +17,36 @@ set(Network_SRC
         src/network/server.hpp
         src/network/socket.cpp
         src/network/socket.hpp
-        src/network/buffer.cpp
-        src/network/buffer.hpp
+        src/network/charbf.cpp
+        src/network/charbf.hpp
         src/network/ioctl.cpp
         src/network/ioctl.hpp
         src/network/client.cpp
         src/network/client.hpp)
 
 set(Memory_Leak_SRC
-        src/debug/debug_new.hpp
-        src/debug/debug_new.cpp
-        src/debug/memcheck.hpp
-        src/network/buffer.cpp
-        src/network/buffer.hpp)
+        src/network/charbf.cpp
+        src/network/charbf.hpp)
 
 set(Network_Buffer_SRC
-        src/debug/debug_new.hpp
-        src/debug/debug_new.cpp
-        src/network/buffer.cpp
-        src/network/buffer.hpp
+        src/network/charbf.cpp
+        src/network/charbf.hpp
         )
 
 set(RPC_Server_SRC
         ${Network_SRC}
-        src/rpc/rpc.hpp
         src/rpc/rpc_server.hpp
         src/rpc/rpc_server.cpp
         src/kv/db.hpp
         src/kv/db.cpp
-        test/rpc_obj.hpp src/rpc/marshall.h src/auxiliary/thr_poll.h src/auxiliary/thr_poll.cc src/auxiliary/fifo.h src/auxiliary/obj_method_thread.h)
+        test/rpc_obj.hpp src/rpc/marshal.h src/auxiliary/thr_poll.h src/auxiliary/thr_poll.cc src/auxiliary/fifo.h src/auxiliary/obj_method_thread.h src/rpc/future.h)
 
 set(RPC_Client_SRC
         ${Network_SRC}
         src/kv/db.hpp
         src/kv/db.cpp
-        src/rpc/rpc_client.cpp src/rpc/rpc_client.hpp test/rpc_obj.hpp src/rpc/marshall.h src/auxiliary/thr_poll.h src/auxiliary/thr_poll.cc src/auxiliary/fifo.h src/auxiliary/obj_method_thread.h)
+        src/rpc/rpc_client.cpp src/rpc/rpc_client.hpp test/rpc_obj.hpp src/rpc/marshal.h src/auxiliary/thr_poll.h src/auxiliary/thr_poll.cc src/auxiliary/fifo.h src/auxiliary/obj_method_thread.h src/rpc/future.h)
 
-add_executable(Pointer_Plus_Test test/pointer_plus.cpp ${Debug_SRC})
 add_executable(Network_Test ${Network_SRC} test/network.cpp src/auxiliary/scope_lock.h)
 add_executable(Memory_Leak_Test ${Memory_Leak_SRC} test/memory_leak.cpp)
 add_executable(Network_Buffer_Test ${Network_Buffer_SRC} test/network_buffer.cpp)

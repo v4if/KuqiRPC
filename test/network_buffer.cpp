@@ -1,16 +1,16 @@
 #include <iostream>
-#include "../src/network/buffer.hpp"
+#include "../src/network/charbf.hpp"
 
 class Test {
 public:
-    Network::Buffer buff;
+    Network::CharBuffer buff;
 };
 int main()
 {
     std::string out;
 
     char temp[] = "Hello World";
-    Network::Buffer buff;
+    Network::CharBuffer buff;
     std::cout << buff.cap() << buff.size() << std::endl;
     out = "cap: " + std::to_string(buff.cap()) + ", size: " + std::to_string(buff.size()) + "\n";
     std::to_string(buff.size());

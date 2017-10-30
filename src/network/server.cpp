@@ -44,7 +44,7 @@ namespace Network {
         int fd = socket_->Accept();
         socket_->SetNonBlock(fd);
         Channel* conn = new Channel(fd, EPOLLIN|EPOLLOUT|EPOLLET, [&](Channel* chan) {
-            Buffer& input = chan->getIO().getInput();
+            CharBuffer& input = chan->getIO().getInput();
             if (input.size() == 0) {
                 // 对端关闭
                 close(chan->fd());
@@ -71,7 +71,7 @@ namespace Network {
     }
 
 
-    void Server::onRead(FuncType func) {
+    void Server::onMsg(FuncType func) {
         on_read_ = func;
     }
 }

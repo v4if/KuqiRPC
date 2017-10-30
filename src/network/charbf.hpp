@@ -7,16 +7,15 @@
 
 
 #include <cstdint>
-#include "../debug/debug_new.hpp"
 #include "../auxiliary/nocopy.hpp"
 
 namespace Network {
-    class Buffer : public NoCopy {
+    class CharBuffer : public NoCopy {
     public:
         enum { InitSize = 4 };
 
-        Buffer();
-        ~Buffer();
+        CharBuffer();
+        ~CharBuffer();
 
         uint32_t cap();
         uint32_t size();
@@ -33,7 +32,7 @@ namespace Network {
         void rewind(); //把指针从现在读取的位置，重新回到开头
         uint32_t canWrite(); //能写入的数据大小
 
-        void adjust(uint32_t capacity); // 调整缓冲大小
+        void resize(uint32_t capacity); // 调整缓冲大小
     private:
         char* data_;
         uint32_t cap_;

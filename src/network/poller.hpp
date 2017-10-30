@@ -6,7 +6,6 @@
 #include "sys/types.h"
 #include "channel.hpp"
 #include "socket.hpp"
-#include "../debug/debug_new.hpp"
 
 namespace Network{
 
@@ -20,7 +19,7 @@ namespace Network{
 
         void registerChannel(Channel*);
         void unregisterChannel(Channel*);
-        void backendPoll(int ms);
+        void waitLoop(int ms);
     private:
         int fd_;
         struct epoll_event events_[MaxEvents];

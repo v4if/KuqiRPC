@@ -28,7 +28,7 @@ namespace Network {
         assert(!epoll_ctl(fd_, EPOLL_CTL_DEL, chan->fd(), &event));
     }
 
-    void Poller::backendPoll(int ms) {
+    void Poller::waitLoop(int ms) {
         int ready = epoll_wait(fd_, events_, MaxEvents, ms);
         assert(!(ready == -1 && errno != EINTR));
 

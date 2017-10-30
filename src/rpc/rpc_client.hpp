@@ -5,25 +5,49 @@
 #ifndef KUQIKV_RPC_CLIENT_HPP
 #define KUQIKV_RPC_CLIENT_HPP
 
+#include <map>
+#include <atomic>
 #include "../network/client.hpp"
-#include "rpc.hpp"
-#include "../debug/debug_new.hpp"
+#include "marshal.h"
+#include "future.h"
 
 namespace RPC {
     class RpcClient: public Network::Client {
     public:
+        typedef std::function<void(Marshal&)> FutureFunctor;
+
+        static std::atomic_uint32_t R_Id;  // request序列号
+
         RpcClient(Network::EventLoop* loop);
 
-        template <class T1, class T2>
-        void Call(std::string method, const T1* args, T2* reply);
+        template <class A, class R>
+        void Call(std::string method, const A* args, Future<R> *fu);
+
+    private:
+        std::map<uint32_t, FutureFunctor> futures_;
     };
 
-    template <class T1, class T2>
-    void RpcClient::Call(std::string method, const T1 *args, T2 *reply) {
-        uint32_t h = RPC::RPC_Impl::hash(method);
-        Network::Buffer& out = getChannel()->getIO().getOutput();
-        out.write(&h, sizeof(h));
-        out.write(args, sizeof(T1));
+
+    inline static uint32_t hash(std::string str) {
+        uint32_t ret = 0;
+        for (char ch : str) {
+            ret += static_cast<u_int32_t >(ch);
+        }
+        return ret;
+    }
+    template <class A, class R>
+    void RpcClient::Call(std::string method, const A *args, Future<R> *fu) {
+        uint32_t h = hash(method);
+
+        A a = (*args);
+        uint32_t r_id = R_Id++;
+        Marshal marshal(&getChannel()->getIO().getInput(), &getChannel()->getIO().getOutput());
+        marshal << h;
+        marshal << r_id;
+        marshal << a;
+
+        futures_.insert({r_id, std::bind(&Future<R>::Notify, fu, std::placeholders::_1)});
+
         getChannel()->sendOut();
     }
 }

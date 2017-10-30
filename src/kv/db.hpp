@@ -8,7 +8,6 @@
 
 #include <iostream>
 #include <unordered_map>
-#include "../debug/debug_new.hpp"
 
 namespace KuqiKV {
     class DB {

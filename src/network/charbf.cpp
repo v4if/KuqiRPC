@@ -5,37 +5,37 @@
 #include <cstring>
 #include <stdlib.h>
 #include <cassert>
-#include "buffer.hpp"
+#include "charbf.hpp"
 
 namespace Network {
-    Buffer::Buffer():data_(new char[InitSize + 1]), cap_(InitSize), size_(0), begin_(0), end_(0) {}
+    CharBuffer::CharBuffer():data_(new char[InitSize + 1]), cap_(InitSize), size_(0), begin_(0), end_(0) {}
 
-    Buffer::~Buffer() {
+    CharBuffer::~CharBuffer() {
         delete[] data_;
     }
 
-    char* Buffer::begin() {
+    char* CharBuffer::begin() {
         return data_ + begin_;
     }
 
-    char* Buffer::end() {
+    char* CharBuffer::end() {
         return data_ + end_;
     }
 
-    char* Buffer::data() {
+    char* CharBuffer::data() {
         data_[end_] = '\0';
         return data_ + begin_;
     }
 
-    uint32_t Buffer::size() {
+    uint32_t CharBuffer::size() {
         return size_;
     }
 
-    uint32_t Buffer::cap() {
+    uint32_t CharBuffer::cap() {
         return cap_;
     }
 
-    uint32_t Buffer::read(void *buff, uint32_t nbytes) {
+    uint32_t CharBuffer::read(void *buff, uint32_t nbytes) {
         assert(nbytes <= size_);
 
         memcpy(buff, data_ + begin_, nbytes);
@@ -50,13 +50,13 @@ namespace Network {
         return nbytes;
     }
 
-    uint32_t Buffer::write(const void *buff, uint32_t nbytes) {
+    uint32_t CharBuffer::write(const void *buff, uint32_t nbytes) {
         uint32_t free = cap_ - size_;
         if (nbytes > free) {
             uint32_t expand = cap_;
             while (end_ + nbytes > expand)
                 expand <<= 1;
-            adjust(expand);
+            resize(expand);
         }
 
         assert(cap_ >= size_ + nbytes);
@@ -66,7 +66,7 @@ namespace Network {
         return nbytes;
     }
 
-    void Buffer::adjust(uint32_t capacity) {
+    void CharBuffer::resize(uint32_t capacity) {
         char* buff = new char[capacity + 1];
 
         assert(buff != NULL);
@@ -79,24 +79,24 @@ namespace Network {
         cap_ = capacity;
     }
 
-    void Buffer::rewind() {
+    void CharBuffer::rewind() {
         begin_ = 0;
         end_ = 0;
         size_ = 0;
     }
 
-    uint32_t Buffer::canWrite() {
+    uint32_t CharBuffer::canWrite() {
         return cap_ - size_;
     }
 
-    void Buffer::advanceTail(uint32_t len) {
+    void CharBuffer::advanceTail(uint32_t len) {
         assert(end_ + len <= cap_);
 
         end_ += len;
         size_ += len;
     }
 
-    void Buffer::advanceHead(uint32_t len) {
+    void CharBuffer::advanceHead(uint32_t len) {
         assert(len <= size_);
 
         begin_ += len;
@@ -107,7 +107,7 @@ namespace Network {
         end_ = size_;
     }
 
-    void Buffer::unGet(uint32_t len) {
+    void CharBuffer::unGet(uint32_t len) {
         assert(len <= begin_);
         begin_ = begin_ - len;
         size_ = size_ - len;

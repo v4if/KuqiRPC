@@ -5,7 +5,6 @@
 #ifndef KUQIKV_RPC_OBJ_HPP
 #define KUQIKV_RPC_OBJ_HPP
 
-#include "../src/debug/debug_new.hpp"
 class Rpc_Obj {
 public:
     struct Args{
@@ -13,8 +12,8 @@ public:
         int num2;
     };
 
-    void Add(const Args* args, int* reply) {
-        *reply = args->num1 + args->num2;
+    void Add(const uint8_t* a, uint8_t* r) {
+        *r = *a;
     }
 };
 

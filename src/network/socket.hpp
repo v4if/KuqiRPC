@@ -3,7 +3,6 @@
 
 #include <arpa/inet.h>
 #include "sys/types.h"
-#include "../debug/debug_new.hpp"
 
 namespace Network {
     enum { BackLog = 32 };
@@ -17,12 +16,7 @@ namespace Network {
         int Listen();
         int Accept();
 
-        struct EndPoint{
-            const char* address_;
-            uint16_t port_;
-        };
-
-        bool Connect(const EndPoint &end_point);
+        bool Connect(const char *addr, uint16_t port);
         int Close();
 
         int SetNonBlock(int fd);

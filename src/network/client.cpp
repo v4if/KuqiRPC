@@ -2,6 +2,7 @@
 // Created by root on 10/16/17.
 //
 
+#include <assert.h>
 #include "client.hpp"
 
 namespace Network {
@@ -13,12 +14,12 @@ namespace Network {
         delete(chan_);
     }
 
-    void Client::onRead(FuncType func) {
+    void Client::onMsg(FuncType func) {
         read_ = func;
     }
 
-    bool Client::connect(const Socket::EndPoint& endPoint) {
-        assert(socket_->Connect(endPoint));
+    bool Client::connect(const EndPoint& endPoint) {
+        assert(socket_->Connect(endPoint.address_, endPoint.port_));
 
         socket_->SetNonBlock(socket_->fd());
         chan_ = new Channel(socket_->fd(), EPOLLIN|EPOLLOUT|EPOLLET, [&](Channel* chan){
