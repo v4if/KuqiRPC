@@ -35,6 +35,7 @@ namespace RPC {
         }
         return ret;
     }
+
     template <class A, class R>
     void RpcClient::Call(std::string method, const A *args, Future<R> *fu) {
         uint32_t h = hash(method);

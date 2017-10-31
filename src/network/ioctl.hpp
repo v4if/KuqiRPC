@@ -13,10 +13,10 @@
 #include "charbf.hpp"
 
 namespace Network {
-    class IO {
+    class IoCtl {
     public:
-        IO(int fd);
-        ~IO();
+        IoCtl(int fd);
+        ~IoCtl();
 
         int fd();
         uint32_t tryRead();

@@ -8,7 +8,7 @@ namespace RPC {
     std::atomic_uint32_t RpcClient::R_Id(0);
     RpcClient::RpcClient(Network::EventLoop *loop): Network::Client(loop) {
         onMsg([this](Network::Channel *chan) {
-            Network::IO &io = chan->getIO();
+            Network::IoCtl &io = chan->getIO();
             Marshal marshal(&io.getInput(), &io.getOutput());
 
             uint32_t r_id;

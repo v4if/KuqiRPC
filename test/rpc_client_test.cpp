@@ -20,15 +20,13 @@ int main() {
         looper.loop();
     });
 
-    Rpc_Obj::Args args{1,8};
-    int reply = 0;
-    uint8_t i = 2;
-    Future<uint8_t> fu;
-    client.Call("Rpc_Obj::Add", &i, &fu);
+    Rpc_Obj::Args args{ 1, 8 };
+    Future<uint32_t> fu;
+    client.Call("Rpc_Obj::Add", &args, &fu);
 
     fu.Wait();
 
-    std::cout << (int)fu.Get() << std::endl;
+    std::cout << fu.Get() << std::endl;
 
     t1.join();
 

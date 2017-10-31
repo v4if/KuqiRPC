@@ -2,7 +2,7 @@
 #include "channel.hpp"
 
 namespace Network {
-    Channel::Channel(int fd, uint32_t events, Func read_cb):
+    Channel::Channel(int fd, uint32_t events, Functor read_cb):
         io_(fd), events_(events), read_cb_(read_cb), canRead_(false), canWrite_(false), connected_(false) {}
 
     Channel::~Channel() {}
@@ -54,7 +54,7 @@ namespace Network {
         }
     }
 
-    IO& Channel::getIO() {
+    IoCtl& Channel::getIO() {
         return io_;
     }
 

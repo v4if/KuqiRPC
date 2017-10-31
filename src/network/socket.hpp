@@ -20,8 +20,6 @@ namespace Network {
         int Close();
 
         int SetNonBlock(int fd);
-        uint32_t Read(int fd, char* data, uint32_t len);
-        uint32_t Write(int fd, char* data, uint32_t len);
 
         int fd() const;
     private:

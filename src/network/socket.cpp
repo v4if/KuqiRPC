@@ -80,42 +80,4 @@ namespace Network {
         }
         return no;
     }
-
-    uint32_t Socket::Read(int fd, char* data, uint32_t len) {
-        uint32_t cnt = 0;
-        ssize_t r;
-        for (; cnt < len && (r = read(fd, data + cnt, len - cnt));) {
-            if (r == -1) {
-                if (errno == EINTR)
-                    continue;
-                if (errno == EAGAIN || errno == EWOULDBLOCK)
-                    break;
-                else
-                    printf("read error, %s :(\n", strerror(errno));
-                break;
-            }
-            cnt += r;
-        }
-
-        return cnt;
-    }
-
-    uint32_t Socket::Write(int fd, char* data, uint32_t len) {
-        uint32_t cnt = 0;
-        ssize_t r;
-        for (;cnt < len && (r = write(fd, data + cnt, len - cnt));) {
-            if (r == -1) {
-                if (errno == EINTR)
-                    continue;
-                if (errno == EAGAIN || errno == EWOULDBLOCK)
-                    break;
-                else
-                    printf("write error, %s :(\n", strerror(errno));
-                break;
-            }
-            cnt += r;
-        }
-
-        return cnt;
-    }
 }

@@ -10,8 +10,9 @@ namespace Network {
     class Channel
     {
     public:
-        using Func = std::function<void(Channel*)>;
-        Channel(int fd, uint32_t events, Func read_cb);
+        typedef std::function<void(Channel*)> Functor;
+
+        Channel(int fd, uint32_t events, Functor read_cb);
         ~Channel();
 
         int fd();
@@ -26,13 +27,13 @@ namespace Network {
         void disableRead();
         void disableConn();
         void disableWrite();
-        IO& getIO();
+        IoCtl& getIO();
 
     private:
         uint32_t events_;
-        Func read_cb_;
-        Func write_cb_;
-        IO io_;
+        Functor read_cb_;
+        Functor write_cb_;
+        IoCtl io_;
         bool canRead_; //控制回调
         bool canWrite_;
         bool connected_; //控制发送到对端

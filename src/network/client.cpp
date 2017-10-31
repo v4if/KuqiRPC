@@ -23,8 +23,13 @@ namespace Network {
 
         socket_->SetNonBlock(socket_->fd());
         chan_ = new Channel(socket_->fd(), EPOLLIN|EPOLLOUT|EPOLLET, [&](Channel* chan){
-//            没有处理对端关闭
-            if (read_) read_(chan);
+            CharBuffer& read_buff = chan->getIO().getInput();
+            if (read_buff.size() == 0) {
+                // 对端关闭
+                close(chan->fd());
+            } else {
+                if (read_) read_(chan);
+            }
         });
         chan_->enableConn();
         chan_->enableRead();

@@ -54,25 +54,25 @@ namespace RPC {
         using Network::Server::onMsg;
         std::map<uint32_t, Functor*> map_;
     };
-}
 
-inline static uint32_t hash(std::string str) {
-    uint32_t ret = 0;
-    for (char ch : str) {
-        ret += static_cast<u_int32_t >(ch);
+    inline static uint32_t hash(std::string str) {
+        uint32_t ret = 0;
+        for (char ch : str) {
+            ret += static_cast<u_int32_t >(ch);
+        }
+        return ret;
     }
-    return ret;
-}
 
-template <typename C, typename A, typename R>
-void RPC::RpcServer::reg(std::string method, C *obj, void (C::*(mtd))(const A *a, R *r)){
-    uint32_t xid = hash(method);
+    template <typename C, typename A, typename R>
+    void RPC::RpcServer::reg(std::string method, C *obj, void (C::*(mtd))(const A *a, R *r)){
+        uint32_t xid = hash(method);
 
-    assert(map_.count(xid) == 0);
+        assert(map_.count(xid) == 0);
 
-    Functor *handler = new Functor;
-    handler->MakeFn(obj, mtd);
-    map_.insert(std::make_pair(xid, handler));
+        Functor *handler = new Functor;
+        handler->MakeFn(obj, mtd);
+        map_.insert(std::make_pair(xid, handler));
+    }
 }
 
 #endif //KUQIKV_RPC_SERVER_HPP

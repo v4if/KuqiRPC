@@ -7,21 +7,20 @@
 
 class Marshal {
 public:
-    Marshal(){}
-    Marshal(Network::CharBuffer *in, Network::CharBuffer *out):input_(in), output_(out) {}
+    Marshal(Network::CharBuffer *read_buff, Network::CharBuffer *write_buff):read_buff_(read_buff), write_buff_(write_buff) {}
     void Read(const void *b, uint32_t sz);
     void Write(void *b, uint32_t sz);
 private:
-    Network::CharBuffer* input_;
-    Network::CharBuffer* output_;
+    Network::CharBuffer* read_buff_;
+    Network::CharBuffer* write_buff_;
 };
 
 inline void Marshal::Read(const void *b, uint32_t sz) {
-    output_->write(b, sz);
+    write_buff_->write(b, sz);
 }
 
 inline void Marshal::Write(void *b, uint32_t sz) {
-    input_->read(b, sz);
+    read_buff_->read(b, sz);
 }
 
 inline Marshal& operator >> (Marshal &marshal, uint8_t &vv) {

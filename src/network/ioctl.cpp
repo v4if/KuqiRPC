@@ -5,14 +5,14 @@
 #include "ioctl.hpp"
 
 namespace Network {
-    IO::IO(int fd):fd_(fd) {}
-    IO::~IO() {}
+    IoCtl::IoCtl(int fd):fd_(fd) {}
+    IoCtl::~IoCtl() {}
 
-    int IO::fd() {
+    int IoCtl::fd() {
         return fd_;
     }
 
-    uint32_t IO::Read(char* data, uint32_t len) {
+    uint32_t IoCtl::Read(char* data, uint32_t len) {
         uint32_t cnt = 0;
         ssize_t r;
         for (; cnt < len && (r = read(fd_, data + cnt, len - cnt));) {
@@ -31,7 +31,7 @@ namespace Network {
         return cnt;
     }
 
-    uint32_t IO::Write(char* data, uint32_t len) {
+    uint32_t IoCtl::Write(char* data, uint32_t len) {
         uint32_t cnt = 0;
         ssize_t r;
         for (;cnt < len && (r = write(fd_, data + cnt, len - cnt));) {
@@ -50,7 +50,7 @@ namespace Network {
         return cnt;
     }
 
-    uint32_t IO::tryRead() {
+    uint32_t IoCtl::tryRead() {
 //        回退指针
         input_.rewind();
 
@@ -70,7 +70,7 @@ namespace Network {
         return nbytes;
     }
 
-    uint32_t IO::tryWrite() {
+    uint32_t IoCtl::tryWrite() {
         uint32_t len = output_.size();
         uint32_t bytes = 0;
         while (bytes < len) {
@@ -84,11 +84,11 @@ namespace Network {
         return bytes;
     }
 
-    CharBuffer& IO::getInput() {
+    CharBuffer& IoCtl::getInput() {
         return input_;
     }
 
-    CharBuffer& IO::getOutput() {
+    CharBuffer& IoCtl::getOutput() {
         return output_;
     }
 }
