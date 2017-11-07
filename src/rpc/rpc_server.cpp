@@ -20,8 +20,8 @@ namespace RPC {
     }
 
     RpcServer::~RpcServer() {
-        for (auto service : map_) {
-            delete service.second;
+        for (auto map : map_) {
+            delete map.second;
         }
     }
 }

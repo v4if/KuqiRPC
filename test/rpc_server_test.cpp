@@ -32,25 +32,5 @@ int main() {
 
     looper.loop();
 
-
-//    typedef std::function<void(const std::string&)> ExampleFunction;
-//    Object instance;
-//    std::string str("World");
-//    ExampleFunction f = std::bind(&Object::hello, &instance,
-//                                  std::placeholders::_1);
-//    f(str);
-//
-//    struct caller_wrapper {
-//
-//        static void fn(const std::string& s, void*) {
-//
-//            return;
-//        }
-//    };
-//
-//
-//    std::function<void(const std::string& s)> fn = std::bind(&caller_wrapper::fn,   std::placeholders::_1, (void*)0);
-//    fn(str);
-
     return 0;
 }
