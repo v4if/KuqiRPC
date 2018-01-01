@@ -3,9 +3,9 @@
 
 #include <vector>
 #include <functional>
-#include "eventloop.hpp"
-#include "socket.hpp"
-#include "channel.hpp"
+#include "eventloop.h"
+#include "socket.h"
+#include "channel.h"
 
 namespace Network {
     class Server : public NoCopy

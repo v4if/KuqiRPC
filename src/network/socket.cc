@@ -5,7 +5,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <errno.h>
-#include "socket.hpp"
+#include "socket.h"
 #include <stdio.h>
 #include <netinet/tcp.h>
 

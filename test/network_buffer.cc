@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../src/network/charbf.hpp"
+#include "../src/network/charbf.h"
 
 class Test {
 public:

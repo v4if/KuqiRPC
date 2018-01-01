@@ -1,7 +1,7 @@
 #include <cassert>
 #include <unistd.h>
 #include <algorithm>
-#include "server.hpp"
+#include "server.h"
 
 namespace Network {
     Server::Server(EventLoop* loop, int port):listen_port_(port), loop_(loop), socket_(new Socket){}

@@ -1,7 +1,7 @@
 //
 // Created by root on 10/9/17.
 //
-#include "db.hpp"
+#include "db.h"
 namespace KuqiKV {
     void DB::Get(const KV_Protocol::GetArgs *args, KV_Protocol::GetReply *future) {
         if (map_.count(args->key) == 0) {

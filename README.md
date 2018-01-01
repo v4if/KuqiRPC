@@ -1,9 +1,6 @@
-## KuqiKV
+## KuqiRPC
 
-Distributed Key Value Storage
+RPC Framework
 
 ![cartoon](https://raw.githubusercontent.com/v4if/KuqiKV/master/doc/img/cartoon.jpg)
 
-## 前方正在施工中...
-
-![45R58PICkvM](https://raw.githubusercontent.com/v4if/KuqiKV/master/doc/img/working.jpg)

@@ -3,8 +3,8 @@
 
 #include <functional>
 #include "sys/types.h"
-#include "charbf.hpp"
-#include "ioctl.hpp"
+#include "charbf.h"
+#include "ioctl.h"
 
 namespace Network {
     class Channel

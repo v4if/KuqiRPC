@@ -5,7 +5,7 @@
 #include <cstring>
 #include <stdlib.h>
 #include <cassert>
-#include "charbf.hpp"
+#include "charbf.h"
 
 namespace Network {
     CharBuffer::CharBuffer():data_(new char[InitSize + 1]), cap_(InitSize), size_(0), begin_(0), end_(0) {}

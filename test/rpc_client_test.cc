@@ -4,9 +4,9 @@
 
 #include <thread>
 #include <iostream>
-#include "../src/network/client.hpp"
-#include "../src/rpc/rpc_client.hpp"
-#include "rpc_obj.hpp"
+#include "../src/network/client.h"
+#include "../src/rpc/rpc_client.h"
+#include "rpc_obj.h"
 
 int main() {
     Network::EventLoop looper;

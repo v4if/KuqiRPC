@@ -6,54 +6,45 @@ set(CMAKE_CXX_FLAGS -g)
 
 
 set(Network_SRC
-        src/auxiliary/nocopy.hpp
-        src/network/channel.cpp
-        src/network/channel.hpp
-        src/network/eventloop.cpp
-        src/network/eventloop.hpp
-        src/network/poller.cpp
-        src/network/poller.hpp
-        src/network/server.cpp
-        src/network/server.hpp
-        src/network/socket.cpp
-        src/network/socket.hpp
-        src/network/charbf.cpp
-        src/network/charbf.hpp
-        src/network/ioctl.cpp
-        src/network/ioctl.hpp
-        src/network/client.cpp
-        src/network/client.hpp)
-
-set(Memory_Leak_SRC
-        src/network/charbf.cpp
-        src/network/charbf.hpp)
-
-set(Network_Buffer_SRC
-        src/network/charbf.cpp
-        src/network/charbf.hpp
-        )
+        src/auxiliary/nocopy.h
+        src/network/channel.cc
+        src/network/channel.h
+        src/network/eventloop.cc
+        src/network/eventloop.h
+        src/network/poller.cc
+        src/network/poller.h
+        src/network/server.cc
+        src/network/server.h
+        src/network/socket.cc
+        src/network/socket.h
+        src/network/charbf.cc
+        src/network/charbf.h
+        src/network/ioctl.cc
+        src/network/ioctl.h
+        src/network/client.cc
+        src/network/client.h
+        src/network/charbf.cc
+        src/network/charbf.h)
 
 set(RPC_Server_SRC
         ${Network_SRC}
-        src/rpc/rpc_server.hpp
-        src/rpc/rpc_server.cpp
-        src/b+tree/db.hpp
-        src/b+tree/db.cpp
-        test/rpc_obj.hpp src/rpc/marshal.h src/auxiliary/thr_poll.h src/auxiliary/thr_poll.cc src/auxiliary/fifo.h src/auxiliary/obj_method_thread.h src/rpc/future.h src/b+tree/kv_protocol.h test/rpc_kv_server_test.cc)
+        src/rpc/rpc_server.h
+        src/rpc/rpc_server.cc
+        src/kvtest/db.h
+        src/kvtest/db.cc
+        test/rpc_obj.h src/rpc/marshal.h src/rpc/future.h src/kvtest/kv_protocol.h)
 
 set(RPC_Client_SRC
         ${Network_SRC}
-        src/b+tree/db.hpp
-        src/b+tree/db.cpp
-        src/rpc/rpc_client.cpp src/rpc/rpc_client.hpp test/rpc_obj.hpp src/rpc/marshal.h src/auxiliary/thr_poll.h src/auxiliary/thr_poll.cc src/auxiliary/fifo.h src/auxiliary/obj_method_thread.h src/rpc/future.h src/b+tree/kv_protocol.h)
+        src/kvtest/db.h
+        src/kvtest/db.cc
+        src/rpc/rpc_client.cc src/rpc/rpc_client.h test/rpc_obj.h src/rpc/marshal.h src/rpc/future.h src/kvtest/kv_protocol.h)
 
-add_executable(Network_Test ${Network_SRC} test/network.cpp src/auxiliary/scope_lock.h)
-add_executable(Memory_Leak_Test ${Memory_Leak_SRC} test/memory_leak.cpp)
-add_executable(Network_Buffer_Test ${Network_Buffer_SRC} test/network_buffer.cpp)
-add_executable(RPC_Server_Test ${RPC_Server_SRC} test/rpc_server_test.cpp)
-add_executable(RPC_Client_Test ${RPC_Client_SRC} test/rpc_client_test.cpp)
+add_executable(Network_Test ${Network_SRC} test/network.cc src/auxiliary/scope_lock.h)
+add_executable(RPC_Server_Test ${RPC_Server_SRC} test/rpc_server_test.cc)
+add_executable(RPC_Client_Test ${RPC_Client_SRC} test/rpc_client_test.cc)
 
-add_executable(RPC_KV_Server_Test ${RPC_Server_SRC})
+add_executable(RPC_KV_Server_Test ${RPC_Server_SRC} test/rpc_kv_server_test.cc)
 add_executable(RPC_KV_Client_Test ${RPC_Client_SRC} test/rpc_kv_client_test.cc)
 
 target_link_libraries(RPC_Client_Test pthread)

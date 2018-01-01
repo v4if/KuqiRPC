@@ -2,7 +2,7 @@
 // Created by root on 9/28/17.
 //
 #include <sstream>
-#include "rpc_server.hpp"
+#include "rpc_server.h"
 
 namespace RPC {
     RpcServer::RpcServer(Network::EventLoop* loop, int port): Network::Server(loop, port) {

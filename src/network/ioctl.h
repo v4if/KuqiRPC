@@ -10,7 +10,7 @@
 #include <zconf.h>
 #include <cerrno>
 #include <cstring>
-#include "charbf.hpp"
+#include "charbf.h"
 
 namespace Network {
     class IoCtl {

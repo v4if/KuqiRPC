@@ -1,7 +1,7 @@
 #include <iostream>
 #include <algorithm>
-#include "../src/network/eventloop.hpp"
-#include "../src/network/server.hpp"
+#include "../src/network/eventloop.h"
+#include "../src/network/server.h"
 
 int main()
 {

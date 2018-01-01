@@ -5,9 +5,9 @@
 #include <thread>
 #include <iostream>
 #include "../src/rpc/future.h"
-#include "../src/network/client.hpp"
-#include "../src/rpc/rpc_client.hpp"
-#include "../src/b+tree/kv_protocol.h"
+#include "../src/network/client.h"
+#include "../src/rpc/rpc_client.h"
+#include "../src/kvtest/kv_protocol.h"
 
 int main() {
     Network::EventLoop looper;

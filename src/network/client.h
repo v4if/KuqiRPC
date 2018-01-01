@@ -6,8 +6,8 @@
 #define KUQIKV_CLIENT_HPP
 
 
-#include "socket.hpp"
-#include "eventloop.hpp"
+#include "socket.h"
+#include "eventloop.h"
 
 namespace Network {
     class Client: public NoCopy {

@@ -1,8 +1,8 @@
 #ifndef _EVENTLOOP_HPP_
 #define _EVENTLOOP_HPP_
 
-#include "poller.hpp"
-#include "channel.hpp"
+#include "poller.h"
+#include "channel.h"
 
 namespace Network {
     class EventLoop : public NoCopy

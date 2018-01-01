@@ -7,7 +7,7 @@
 
 #include <map>
 #include <atomic>
-#include "../network/client.hpp"
+#include "../network/client.h"
 #include "marshal.h"
 #include "future.h"
 

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "channel.hpp"
+#include "channel.h"
 
 namespace Network {
     Channel::Channel(int fd, uint32_t events, Functor read_cb):

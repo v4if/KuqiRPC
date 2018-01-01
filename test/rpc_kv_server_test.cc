@@ -2,9 +2,9 @@
 // Created by root on 11/7/17.
 //
 
-#include "../src/network/eventloop.hpp"
-#include "../src/rpc/rpc_server.hpp"
-#include "../src/b+tree/db.hpp"
+#include "../src/network/eventloop.h"
+#include "../src/rpc/rpc_server.h"
+#include "../src/kvtest/db.h"
 
 int main() {
     Network::EventLoop looper;

@@ -2,8 +2,8 @@
 // Created by root on 9/29/17.
 //
 #include <iostream>
-#include "../src/rpc/rpc_server.hpp"
-#include "rpc_obj.hpp"
+#include "../src/rpc/rpc_server.h"
+#include "rpc_obj.h"
 class Test {
 public:
     static void hello(uint8_t i)

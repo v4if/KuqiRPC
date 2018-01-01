@@ -5,7 +5,7 @@
 #ifndef KUQIKV_MARSHALL_H
 #define KUQIKV_MARSHALL_H
 
-#include "../network/charbf.hpp"
+#include "../network/charbf.h"
 
 class Marshal {
 public:

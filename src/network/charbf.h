@@ -7,7 +7,7 @@
 
 
 #include <cstdint>
-#include "../auxiliary/nocopy.hpp"
+#include "../auxiliary/nocopy.h"
 
 namespace Network {
     class CharBuffer : public NoCopy {
