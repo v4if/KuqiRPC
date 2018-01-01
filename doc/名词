@@ -1,4 +1,0 @@
-ZooKeeper: 那时根本搞不清ZooKeeper是如何实现集群调度的，client的意义和znode的意义是什么？leader选举是ZooKeeper服务器之间的策略算法，还是Client之间的策略算法
-
-大数据组件原理总结-Hadoop、Hbase、Kafka、Zookeeper、Spark
-http://blog.csdn.net/henni_719/article/details/52213545

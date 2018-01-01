@@ -18,4 +18,24 @@ C++ 一个含有静态全局变量的头文件被包含多次_百度知道
 inline 函数  声明 定义 就地定义
 The C++ Programming Language
 
+=======================
 模板的声明和实现必须写在一起
+
+ZooKeeper: 那时根本搞不清ZooKeeper是如何实现集群调度的，client的意义和znode的意义是什么？leader选举是ZooKeeper服务器之间的策略算法，还是Client之间的策略算法
+
+大数据组件原理总结-Hadoop、Hbase、Kafka、Zookeeper、Spark
+http://blog.csdn.net/henni_719/article/details/52213545
+========================
+顺序索引与散列索引
+
+在数据之外，数据库系统还维护着满足特定查找算法的数据结构，这些数据结构以某种方式引用（指向）数据，这样就可以在这些数据结构上实现高级查找算法。这种数据结构，就是索引。
+
+有两种不同的数据库范式，一种是Seek，另一种是Transfer。RDBMS通常都是Seek型的，主要是由用于存储数据的B树或者是B+树结构引起的，在磁盘seek的速率级别上实现各种操作，通常每个访问需要log(N)个seek操作。另一方面，LSM-tree则属于Transfer型。在磁盘传输速率的级别上进行文件的排序和merges以及log(对应于更新操作)操作。
+
+B-Trees
+B << #of child < 2B (branch factor)
+B - 1 << #of keys < 2B - 1
+All leaves are at same depth
+
+split
+merge (B - 2) + (B - 1)  + 1= 2B - 3 + 1 = 2B - 2
