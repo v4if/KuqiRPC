@@ -23,10 +23,6 @@ int main() {
     RPC::RpcServer serv(&looper, 8080);
     serv.Start();
 
-//    MC.atExit([&]() {
-//        looper.exit();
-//    });
-
     Rpc_Obj obj;
     serv.reg("Rpc_Obj::Add", &obj, &Rpc_Obj::Add);
 

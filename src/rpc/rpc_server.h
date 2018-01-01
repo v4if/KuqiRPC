@@ -11,7 +11,7 @@
 #include <cxxabi.h>
 #include <assert.h>
 #include <memory>
-#include "../network/server.hpp"
+#include "../network/server.h"
 #include "marshal.h"
 
 namespace RPC {
