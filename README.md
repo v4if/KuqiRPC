@@ -49,7 +49,7 @@ int main() {
         looper.loop();
     });
 
-    KV_Protocol::PutArgs putArgs{"test_rpc", "rpc msg"};
+    KV_Protocol::PutArgs putArgs{"test_key", "rpc msg"};
     Future<KV_Protocol::PutReply> putFu;
     client.Call("DB::Put", &putArgs, &putFu);
 
@@ -57,7 +57,7 @@ int main() {
     std::cout << (int)putFu.Get().ok << std::endl;
 
 
-    KV_Protocol::PutArgs getArgs{"test_rpc"};
+    KV_Protocol::PutArgs getArgs{"test_key"};
     Future<KV_Protocol::GetReply> GetFu;
     client.Call("DB::Get", &getArgs, &GetFu);
     GetFu.Wait();
