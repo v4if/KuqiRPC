@@ -7,7 +7,8 @@
 ## Framework Architecture
 
 ## Tutorial
-### Server KV test
+
+`Server KV test`
 ```c++
 #include "../src/network/eventloop.h"
 #include "../src/rpc/rpc_server.h"
@@ -28,7 +29,7 @@ int main() {
 }
 ```
 
-### Client KV test
+`Client KV test`
 ```c++
 #include <thread>
 #include <iostream>
