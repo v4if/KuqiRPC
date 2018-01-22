@@ -1,10 +1,10 @@
 ## KuqiRPC
 
-RPC Framework
-
-事件驱动模型
+轻量级 RPC Framework
 
 ![cartoon](https://raw.githubusercontent.com/v4if/KuqiKV/master/doc/img/cartoon.jpg)
+
+## Framework Architecture
 
 ## Tutorial
 ### Server KV test
