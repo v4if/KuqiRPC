@@ -75,5 +75,97 @@ int main() {
 }
 ```
 
+## 反射简单框架
+```C++
+// This file is a "Hello, world!" in C++ language by GCC for wandbox.
+#include <iostream>
+#include <functional>
+#include <string>
+#include <cstdlib>
+#include <map>
 
+class RunTest {
+public:
+    struct Args{
+        int num1;
+        int num2;
+    };
+    typedef int Reply;
+    void add(Args* args, Reply* reply) {
+        *reply = args->num1 + args->num2;
+    }
+};
+
+class Caller {
+public:
+    typedef std::function<void (void*)> Functor;
+    
+    template<typename A, typename R>
+    struct Wrapper {
+        A* args;
+        R* reply;
+        
+        Wrapper(A* a, R* r): args(a), reply(r) {}
+    };
+    
+    template<typename C, typename A, typename R>
+    bool reg(std::string method, C* obj, void (C::*(call))(A* args, R* reply));
+    
+    template<typename A, typename R>
+    void call(std::string method, A* args, R* reply);
+private:
+    std::map<std::string, Functor> reflect;
+};
+
+template<typename C, typename A, typename R>
+bool Caller::reg(std::string method, C* obj, void (C::*(call))(A* args, R* reply)) {
+    
+    auto iter = reflect.find(method);
+    if (iter != reflect.end()) return false;
+    
+    reflect[method] = [=](void* v) {
+        Wrapper<A, R>* w = (Wrapper<A, R>*)v;
+        A* args = w->args;
+        R* reply = w->reply;
+        
+        std::cout << args->num1 << " " << args->num2 << std::endl;
+        (obj->*call)(args, reply);
+    };
+    return true;
+}
+
+template<typename A, typename R>
+void Caller::call(std::string method, A* args, R* reply) {
+    auto iter = reflect.find(method);
+    if (iter == reflect.end()) return;
+    
+    Wrapper<A, R> w{args, reply};
+    iter->second(&w);
+}
+
+int main()
+{
+    RunTest rt;
+    Caller caller;
+    caller.reg("RunTest::add", &rt, &RunTest::add);
+    
+    RunTest::Args args{1,2};
+    RunTest::Reply future;
+    caller.call("RunTest::add", &args, &future);
+    std::cout << future << std::endl;
+    std::cout << "Hello, Wandbox!" << std::endl;
+}
+
+// GCC reference:
+// https://gcc.gnu.org/
+
+/**
+Start
+1 2
+3
+Hello, Wandbox!
+0
+Finish
+ */
+```
 
