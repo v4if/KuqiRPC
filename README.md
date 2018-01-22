@@ -5,6 +5,11 @@
 ![cartoon](https://raw.githubusercontent.com/v4if/KuqiKV/master/doc/img/cartoon.jpg)
 
 ## Framework Architecture
+![UML](https://raw.githubusercontent.com/v4if/KuqiKV/master/doc/img/UMLSequenceDiagram-loop.png)
+
+![UML](https://raw.githubusercontent.com/v4if/KuqiKV/master/doc/img/DataMembers-serv.png)
+
+![UML](https://raw.githubusercontent.com/v4if/KuqiKV/master/doc/img/DataMembers-client.png)
 
 ## Tutorial
 
