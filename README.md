@@ -63,7 +63,7 @@ int main() {
     std::cout << (int)putFu.Get().ok << std::endl;
 
 
-    KV_Protocol::PutArgs getArgs{"test_key"};
+    KV_Protocol::GetArgs getArgs{"test_key"};
     Future<KV_Protocol::GetReply> GetFu;
     client.Call("DB::Get", &getArgs, &GetFu);
     GetFu.Wait();
