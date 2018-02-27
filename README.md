@@ -15,7 +15,7 @@
 <div align="center"><b>整体架构图</b></div>
 
 <br>
-<img align="center" alt="arch" src="https://raw.githubusercontent.com/v4if/KuqiKV/master/doc/img/UMLSequenceDiagram-loop.png">
+<img align="middle" alt="arch" src="https://raw.githubusercontent.com/v4if/KuqiKV/master/doc/img/UMLSequenceDiagram-loop.png">
 <div align="center"><b>网络通信时序图</b></div>
 
 ## Data Structure
