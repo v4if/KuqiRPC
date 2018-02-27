@@ -12,10 +12,11 @@
 消息里会有携带RequestID，来实现异步返回Future
 
 ![arch](http://oowjr8zsi.bkt.clouddn.com/arch.png)
-<div style="text-align: center;"><b>整体架构图</b></div>
+<div align="center"><b>整体架构图</b></div>
 
-![UML](https://raw.githubusercontent.com/v4if/KuqiKV/master/doc/img/UMLSequenceDiagram-loop.png)
-<div style="text-align: center;"><b>网络通信时序图</b></div>
+
+<div align="center">![UML](https://raw.githubusercontent.com/v4if/KuqiKV/master/doc/img/UMLSequenceDiagram-loop.png)</div>
+<div align="center"><b>网络通信时序图</b></div>
 
 ## Data Structure
 ![UML](https://raw.githubusercontent.com/v4if/KuqiKV/master/doc/img/DataMembers-serv.png)
