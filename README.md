@@ -5,15 +5,17 @@
 ![cartoon](https://raw.githubusercontent.com/v4if/KuqiKV/master/doc/img/cartoon.jpg)
 
 ## Framework Architecture
-![UML](https://raw.githubusercontent.com/v4if/KuqiKV/master/doc/img/UMLSequenceDiagram-loop.png)
-
-![arch](http://oowjr8zsi.bkt.clouddn.com/arch.png)
-
 * 透明化远程服务调用：代理模式
 * 消息编码和解码：序列化
 * 通信：单线程 + epoll多路复用
 
 消息里会有携带RequestID，来实现异步返回Future
+
+![arch](http://oowjr8zsi.bkt.clouddn.com/arch.png)
+<center>整体架构图</center >
+
+![UML](https://raw.githubusercontent.com/v4if/KuqiKV/master/doc/img/UMLSequenceDiagram-loop.png)
+<center>通信架构图</center >
 
 ## Data Structure
 ![UML](https://raw.githubusercontent.com/v4if/KuqiKV/master/doc/img/DataMembers-serv.png)
